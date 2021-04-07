@@ -6,19 +6,6 @@ import wordninja
 def hasDigit(inputString):
     return any(char.isdigit() for char in inputString)
 
-def tolerant(source_dwords, target_dwords):
-    rmt = target_dwords.copy()
-    if len(source_dwords)<4: return False
-    if len(target_dwords)<4: return False
-    rms = set()
-    for word in source_dwords:
-        if word in target_dwords:
-            rmt.remove(word)
-        else:
-            rms.add(word)
-    return len(rmt)<=1 and len(rms) <=1
-
-
 class DictGroupLayer(object):
     def __init__(self, log_messages, dictionary_file=None):
         self.log_messages = log_messages
