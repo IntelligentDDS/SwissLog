@@ -1,0 +1,17 @@
+gensim==3.8.1
+numpy==1.18.5
+wordninja==2.0.0
+bert_serving_client==1.10.0
+fasttext==0.9.1
+ipdb==0.13.4
+scipy==1.6.1
+tqdm==4.46.1
+jieba==0.42.1
+pandas==1.2.3
+torch==1.1.0
+bert_serving==0.0.1
+datasketch==1.5.3
+hashes==1.1.0
+python_Levenshtein==0.12.2
+scikit_learn==0.24.1
+tensorboardX==2.1
