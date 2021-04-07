@@ -13,7 +13,6 @@ The file structure is as belows:
     └─offline_logparser
         │  EngCorpus.pkl
         │  run.py
-        │  templates.pkl
         │  
         ├─evaluator
         │  │  evaluator.py
@@ -22,8 +21,8 @@ The file structure is as belows:
         └─layers
             │  dict_group_layer.py (for dictionarizing)
             │  file_output_layer.py (for file output)
-            │  knowledge_layer.py (for preprocess)
-            │  mask_layer.py (for applying LCS and mergeing using  prefix tree)
+            │  knowledge_layer.py (for preprocessing)
+            │  mask_layer.py (for applying LCS and mergeing using prefix tree)
             │  tokenize_group_layer.py (for tokenizing)
             └─__init__.py
 ```
@@ -43,7 +42,7 @@ We first construct a dictionary and utilize an English corpus including 5.2 mill
 It is also fine if you would like to use your own dictionary. Please carefully follow the dictionary format. For now, the program only receives the `.pkl` file storing the dict structure where the key is the word and the value is the occurrence. 
 
 ### Step 2: Just run the file
-Please execute the `run.py` file in the offline_logparser directory. We 
+Please execute the `run.py` file in the offline_logparser directory. 
 ```
 cd log_parser/offline_logparser
 python3 run.py --dictionary=$PATH_OF_DICTIONARY
