@@ -31,8 +31,6 @@ class Trie:
                 now = now.childs['<*>']
             else:
                 return -1
-        if template_list and wd_count/len(template_list) > 0.5:
-            return -1
         return now.tag
 
 def maskdel(template):
