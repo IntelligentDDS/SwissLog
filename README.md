@@ -1,5 +1,5 @@
 # SwissLog
-This repository is the basic implementation of our publication in ISSRE'20  conference paper [SwissLog: Robust and Unified Deep Learning Based Log Anomaly Detection for Diverse Faults](https://ieeexplore.ieee.org/abstract/document/9251078/). SwissLog contains two parts: log parsing and anomaly detection. We first open source the log parsing part here. 
+This repository is the basic implementation of our publication in ISSRE'20  conference paper [SwissLog: Robust and Unified Deep Learning Based Log Anomaly Detection for Diverse Faults](https://ieeexplore.ieee.org/abstract/document/9251078/) and its extend version on TDSC [SwissLog: Robust Anomaly Detection and Localization for Interleaved Unstructured Logs](https://ieeexplore.ieee.org/abstract/document/9744513). SwissLog contains two parts: log parsing and anomaly detection. We first open source the log parsing part here. 
 
 
 ## Description 
@@ -8,23 +8,23 @@ SwissLog adopts a novel log parsing method and extracts multiple templates by to
 ## Project Structure
 The file structure is as belows:
 ```
-└─log_parser
-    ├─logs
-    └─offline_logparser
-        │  EngCorpus.pkl
-        │  run.py
-        │  
-        ├─evaluator
-        │  │  evaluator.py
-        │  │  __init__.py
-        │          
-        └─layers
-            │  dict_group_layer.py (for dictionarizing)
-            │  file_output_layer.py (for file output)
-            │  knowledge_layer.py (for preprocessing)
-            │  mask_layer.py (for applying LCS and mergeing using prefix tree)
-            │  tokenize_group_layer.py (for tokenizing)
-            └─__init__.py
+.
+├── LICENSE
+├── README.md
+├── log_parser
+│   ├── EngCorpus.pkl
+│   ├── logs
+│   ├── offline_logparser
+│   │   ├── evaluator
+│   │   ├── layers
+│   │   └── run.py
+│   └── online_logparser
+│       ├── evaluator
+│       ├── layers
+│       ├── online_run.py
+│       └── utils
+└── requirements.txt
+
 ```
 
 ## Datasets
@@ -42,12 +42,20 @@ We first construct a dictionary and utilize an English corpus including 5.2 mill
 It is also fine if you would like to use your own dictionary. Please carefully follow the dictionary format. For now, the program only receives the `.pkl` file storing the dict structure where the key is the word and the value is the occurrence. 
 
 ### Step 2: Just run the file
+
+#### Offline version
 Please execute the `run.py` file in the offline_logparser directory. 
 ```
 cd log_parser/offline_logparser
 python3 run.py --dictionary=$PATH_OF_DICTIONARY
 ```
 
+#### Online version
+Please execute the `online_run.py` file in the online_logparser directory. 
+```
+cd log_parser/online_logparser
+python3 online_run.py --dictionary=$PATH_OF_DICTIONARY
+```
 
 
 ## Results
@@ -74,6 +82,10 @@ In this demo, we present benchmark results on 16 datasets. Overall, we observe t
 |Average |0.9967 |0.9623 | 
 
 
+## ChangeLogs
+- 2022.06 
+  - Update the online version log parser
+
 ## Acknowledges:
 SwissLog is implemented based on [LogPai team](https://github.com/logpai), we appreciate their contributions to the community. 
 
@@ -98,6 +110,14 @@ Please cite our ISSRE'20 paper if you find this work is helpful.
   pages={92--103},
   year={2020},
   organization={IEEE}
+}
+
+@article{li2022swisslog,
+  title={SwissLog: Robust Anomaly Detection and Localization for Interleaved Unstructured Logs},
+  author={Li, Xiaoyun and Chen, Pengfei and Jing, Linxiao and He, Zilong and Yu, Guangba},
+  journal={IEEE Transactions on Dependable and Secure Computing},
+  year={2022},
+  publisher={IEEE}
 }
 ```
 
