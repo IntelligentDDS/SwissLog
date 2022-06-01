@@ -8,7 +8,7 @@ scipy==1.6.1
 tqdm==4.46.1
 jieba==0.42.1
 pandas==1.2.3
-# torch==1.1.0
+torch==1.1.0
 bert_serving==0.0.1
 datasketch==1.5.3
 hashes==1.1.0

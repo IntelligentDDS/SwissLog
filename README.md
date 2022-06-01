@@ -1,5 +1,5 @@
 # SwissLog
-This repository is the basic implementation of our publication in ISSRE'20  conference paper [SwissLog: Robust and Unified Deep Learning Based Log Anomaly Detection for Diverse Faults](https://ieeexplore.ieee.org/abstract/document/9251078/) and its extend version on TDSC [SwissLog: Robust Anomaly Detection and Localization for Interleaved Unstructured Logs](https://ieeexplore.ieee.org/abstract/document/9744513). SwissLog contains two parts: log parsing and anomaly detection. We first open source the log parsing part here. 
+This repository is the basic implementation of our publication in ISSRE'20  conference paper [SwissLog: Robust and Unified Deep Learning Based Log Anomaly Detection for Diverse Faults](https://ieeexplore.ieee.org/abstract/document/9251078/) and its extend version on TDSC [SwissLog: Robust Anomaly Detection and Localization for Interleaved Unstructured Logs](https://ieeexplore.ieee.org/abstract/document/9744513). SwissLog contains two parts: log parsing and anomaly detection. 
 
 
 ## Description 
@@ -11,6 +11,13 @@ The file structure is as belows:
 .
 ├── LICENSE
 ├── README.md
+├── anomaly_detection
+│   ├── encoder
+│   │   ├── BertEncoder.py
+│   │   └── word2vecEncoder.py
+│   ├── perf_model.py
+│   ├── perf_predict.py
+│   └── perf_train.py
 ├── log_parser
 │   ├── EngCorpus.pkl
 │   ├── logs
@@ -36,21 +43,23 @@ pip install -r requirements.txt
 ```
 
 ## Quick Start
-### Step 1: Construct a dictionary
+
+### Log Parser
+#### Step 1: Construct a dictionary
 We first construct a dictionary and utilize an English corpus including 5.2 million sentences, which is accessible on the [repository](https://github.com/brightmart/nlp_chinese_corpus) (or you can directly download this in this [link](https://storage.googleapis.com/nlp_chinese_corpus/translation2019zh.zip)). After splitting this corpus with the space delimiter, we collect 588,054 distinct words. Noting that not every occurred word is valid (e.g., location name), we set an occurrence threshold to filter common valid words. The dictionary finally remains only 18,653 common words. In the evaluation, we will use these 18,653 common words as the dictionary D to recognize valid words. The dictionary is stored as the file `EngCorpus.pkl`
 
 It is also fine if you would like to use your own dictionary. Please carefully follow the dictionary format. For now, the program only receives the `.pkl` file storing the dict structure where the key is the word and the value is the occurrence. 
 
-### Step 2: Just run the file
+#### Step 2: Just run the file
 
-#### Offline version
+##### Offline version
 Please execute the `run.py` file in the offline_logparser directory. 
 ```
 cd log_parser/offline_logparser
 python3 run.py --dictionary=$PATH_OF_DICTIONARY
 ```
 
-#### Online version
+##### Online version
 Please execute the `online_run.py` file in the online_logparser directory. 
 ```
 cd log_parser/online_logparser
@@ -85,6 +94,7 @@ In this demo, we present benchmark results on 16 datasets. Overall, we observe t
 ## ChangeLogs
 - 2022.06 
   - Update the online version log parser
+  - Update anomaly detection code
 
 ## Acknowledges:
 SwissLog is implemented based on [LogPai team](https://github.com/logpai), we appreciate their contributions to the community. 
