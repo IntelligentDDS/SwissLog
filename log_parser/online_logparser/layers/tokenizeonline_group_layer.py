@@ -25,7 +25,9 @@ class TokenizeOnlineGroupLayer(Layer):
                 tokens.append(s[r])
                 l=r+1
         tokens.append(s[l:])
-        tokens = list(filter(None, [token.strip() for token in tokens]))
+        
+        tokens = list(filter(lambda x: x!='', tokens))
+        # import pdb; pdb.set_trace()
         for i in range(len(tokens)):
             if all(char.isdigit() for char in tokens[i]):
                 tokens[i] = '<*>'
@@ -35,9 +37,11 @@ class TokenizeOnlineGroupLayer(Layer):
         '''
             Split string using space
         '''
+        # import pdb; pdb.set_trace()
         
         doc = self.preprocess(log_entry['Content'])
-        words = self.splitbychars(doc, ',;:"= ')
+        # add other delimiters here
+        words = self.splitbychars(doc, ',;:"= []')
         log_entry['Content'] = words
         return log_entry
 

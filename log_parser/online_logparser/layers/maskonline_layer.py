@@ -1,6 +1,6 @@
 from difflib import SequenceMatcher
 from lib2to3.pgen2 import token
-from turtle import update
+# from turtle import update
 
 from tqdm import tqdm
 

@@ -55,7 +55,7 @@ def generate_logformat_regex(logformat):
     regex = re.compile('^' + regex + '$')
     return headers, regex
 
-
+    
 ds_setting = {
     'HDFS': {
         'log_file': 'HDFS/HDFS_2k.log',
@@ -170,7 +170,7 @@ if __name__ == '__main__':
     corpus = args.dictionary
 
     # setting = ds_setting[dataset]
-
+    # ds_setting = {'OpenStack': ds_setting['OpenStack']}
     benchmark_result = []
     for dataset, setting in ds_setting.items():
         print('\n=== Evaluation on %s ==='%dataset) 
@@ -198,7 +198,7 @@ if __name__ == '__main__':
         for lineid, log_entry in log_messages.items():
             if lineid in [1000, 10000, 100000, 1000000, 2000000, 3000000, 4000000, 5000000, 6000000, 7000000, 8000000, 9000000, 10000000]:
                 print('Parsing done. [Time taken: {!s}]'.format(datetime.now() - starttime))
-
+            log_entry['Message'] = log_entry['Content']
             # preprocess
             log_entry = knowledge_layer.run(log_entry)
 
@@ -214,7 +214,7 @@ if __name__ == '__main__':
             # print('After online parsing, templates updated: {} \n\n\n'.format(templates))
         # results = results.map(mask_layer.tagMap)
         output_file = os.path.join(outdir, log_file)
-        FileOnlineOutputLayer(log_messages, results, output_file, mask_layer.cluster2Template, ['LineId'] + headers).run()
+        FileOnlineOutputLayer(log_messages, results, output_file, mask_layer.cluster2Template, ['LineId'] + headers, keep_para=True).run()
         F1_measure, accuracy = evaluator.evaluate(
                             groundtruth=os.path.join(indir, log_file + '_structured.csv'),
                             parsedresult=os.path.join(outdir, log_file + '_structured.csv')
@@ -226,7 +226,7 @@ if __name__ == '__main__':
     for i in range(len(benchmark_result)):
         avg_accr += benchmark_result[i][2]
     avg_accr /= len(benchmark_result)
-    pd_result = pd.DataFrame(benchmark_result, columns={'dataset', 'F1_measure', 'Accuracy'})
+    pd_result = pd.DataFrame(benchmark_result, columns=['dataset', 'F1_measure', 'Accuracy'])
     print(pd_result)
     print('avarage accuracy is {}'.format(avg_accr))
     pd_result.to_csv('benchmark_result.csv', index=False)
