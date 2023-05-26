@@ -92,6 +92,9 @@ In this demo, we present benchmark results on 16 datasets. Overall, we observe t
 
 
 ## ChangeLogs
+- 2023.05
+  - Fix bugs: use original delimiters instead of space to join template tokens
+  - Add parameter list extraction
 - 2022.06 
   - Update the online version log parser
   - Update anomaly detection code
